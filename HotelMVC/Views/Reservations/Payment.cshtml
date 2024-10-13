@@ -1,0 +1,90 @@
+﻿@model HotelMVC.Models.Reservation
+
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<head>
+    <style>
+        .form-group input, .form-group button, .form-group a {
+            font-weight: 700;
+            height: 55px;
+            padding: 10px 30px;
+            width: 100%;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+            line-height: 35px;
+        }
+        .control-label{
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<hr />
+
+<div class="container">
+<div class="row" style="display: flex; justify-content: center;">
+    <div class="col-md-6 col-sm-8">
+        <form asp-action="PayCheck" method="post">
+            <input type="hidden" name="ReservationId" value="@Model.Reservationid" />
+            <input type="hidden" name="Checkindate" value="@Model.Checkindate.Value.ToString("yyyy-MM-dd")" />
+            <input type="hidden" name="Checkoutdate" value="@Model.Checkoutdate.Value.ToString("yyyy-MM-dd")" />
+            <input type="hidden" name="Totalprice" value="@Model.Totalprice" />
+            <input type="hidden" name="Userid" value="@Model.Userid" />
+            <input type="hidden" name="Roomid" value="@Model.Roomid" />
+
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Card Number:</label>
+                <input type="text" name="CardNumber"  class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">CVV:</label>
+                <input type="text" name="CVV"  class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Expiry Date:</label>
+                <input type="date" name="ExpiryDate"  class="form-control"/>
+            </div>
+
+            @* <label>Balance:</label>
+            <input type="text" name="Balance" required />*@
+
+            <div class="form-group"  style="margin-top: 45px;">
+                <button class="btn btn-primary" type="submit">Pay</button>  
+            </div>                   
+
+        </form>
+
+         <form asp-action="BookNow" method="post">
+            <input type="hidden" name="ReservationId" value="@Model.Reservationid" />
+            <input type="hidden" name="Checkindate" value="@Model.Checkindate.Value.ToString("yyyy-MM-dd")" />
+            <input type="hidden" name="Checkoutdate" value="@Model.Checkoutdate.Value.ToString("yyyy-MM-dd")" />
+            <input type="hidden" name="Totalprice" value="@Model.Totalprice" />
+            <input type="hidden" name="Userid" value="@Model.Userid" />
+            <input type="hidden" name="Roomid" value="@Model.Roomid" />
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Back</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+</div>
+
+
+
+
+
+

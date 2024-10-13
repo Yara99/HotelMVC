@@ -1,0 +1,182 @@
+﻿@model HotelMVC.Models.Userlogin
+
+@{
+    ViewData["Title"] = "UserProfile";
+    var rid = ViewBag.RoleId;
+    if (rid == 1)
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
+}
+
+<head>
+    @if (rid == 1)
+    {
+        <style>
+
+            .subheading {
+                font-family: 'exotc350_dmbd_btdemi-bold';
+                margin-top: 40px;
+                margin-bottom: 50px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: #fff;
+                padding: 16px;
+            }
+
+            .heading-section {
+                text-align: center;
+            }
+
+                .heading-section img {
+                    margin-bottom: 30px;
+                }
+
+                @*.heading-section h2 {
+                    font-size: 40px;
+                }*@
+
+            .ftco-about ul.about-info li {
+                list-style: none;
+                margin-bottom: 10px;
+                padding-top: 20px;
+            }
+
+                .ftco-about ul.about-info li p:first-child {
+                    font-weight: 600;
+                    color: #fff;
+                    font-size: 18px;
+                }
+
+                .ftco-about ul.about-info li p {
+                    color: #c4c1c1;
+                    font-size: 18px;
+                    display: inline-block;
+                    margin: 5px;
+                }
+
+            .heading-section-cont {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+            }
+            .edit-profile{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 45px;
+            }
+
+        </style>
+    }
+    else
+    {
+        <style>
+
+            .subheading {
+                font-family: 'exotc350_dmbd_btdemi-bold';
+                margin-top: 40px;
+                margin-bottom: 50px;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                border: 2px solid #000;
+                color: #f51d36;
+                padding: 16px;
+            }
+
+            .heading-section {
+                text-align: center;
+            }
+
+                .heading-section img {
+                    margin-bottom: 30px;
+                }
+
+               @* .heading-section h2 {
+                    font-size: 40px;
+                }*@
+
+            .ftco-about ul.about-info li {
+                list-style: none;
+                margin-bottom: 10px;
+                padding-top: 20px;
+            }
+
+                .ftco-about ul.about-info li p:first-child {
+                    font-weight: 600;
+                    color: #000000;
+                    font-size: 18px;
+                }
+
+                .ftco-about ul.about-info li p {
+                    color: #4b4949;
+                    font-size: 18px;
+                    display: inline-block;
+                    margin: 5px;
+                }
+
+            .heading-section-cont {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+            }
+
+            .edit-profile{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 45px;
+            }
+
+            .edit-profile:hover {
+                color: white;
+            }
+
+        </style>
+    }
+
+</head>
+
+<body>
+
+    <section class="container ftco-about" id="about-section">
+        <h1 class="subheading text-center">My Profile</h1>
+        <div class="row pb-3 heading-section-cont">
+
+            <div class="col-md-5 heading-section ">
+                <img src=@Url.Content("~/Images/" + Model.User.Imagepath) asp-append-version="true"
+                     style="border-radius:20%;" width="200" height="200" />
+
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="about-info mt-4 px-md-0 px-2">
+                        <li class="d-flex"><p>Name:</p> <p>@Model.User.Userfname @Model.User.Userlname</p></li>
+                        <li class="d-flex"><p>Email:</p> <p>@Model.User.Useremail</p></li>
+                        <li class="d-flex"><p>Phone: </p> <p>@Model.User.Userphone</p></li>
+                        <li class="d-flex"><p>Username: </p> <p>@Model.Username</p></li>
+                    </ul>
+                </div>
+
+                <div style="margin-top: 50px;">
+                    <a class="btn btn-primary book-now-btn edit-profile" asp-controller="Users"
+                            asp-action="EditProfile" style="width:60%; ">Edit Profile</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+</body>

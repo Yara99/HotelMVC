@@ -1,0 +1,91 @@
+﻿@model HotelMVC.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+
+
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/LoginAndRegisterAssets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/LoginAndRegisterAssets/css/style.css">
+</head>
+
+    <body>
+        @*same as create for customer*@
+         <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form" asp-action="Register" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Userfname" class="control-label"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" asp-for="Userfname" class="form-control" placeholder="Your First Name"/>
+                                
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Userlname" class="control-label"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" asp-for="Userlname" class="form-control" placeholder="Your Last Name"/>
+                              
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Userphone" class="control-label"><i class="zmdi zmdi-email"></i></label>
+                                <input type="text" asp-for="Userphone" class="form-control" placeholder="Your Phone"/>
+                              
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Useremail" class="control-label"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" asp-for="Useremail" class="form-control" placeholder="Your email"/>
+                              
+                            </div>
+
+                            <div class="form-group"> 
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="username" placeholder="Your username" />
+                            </div>
+                             <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ImageFile" class="control-label"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="file" name="ImageFile" asp-for="ImageFile" class="form-control" placeholder="Your Image" />
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/LoginAndRegisterAssets/images/signup-image.jpg" alt="sing up image"></figure>
+                        <a asp-action="Login" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    
+        <!-- JS -->
+        <script src="~/LoginAndRegisterAssets/vendor/jquery/jquery.min.js"></script>
+        <script src="~/LoginAndRegisterAssets/js/main.js"></script>
+    </body>
+</html>
+

@@ -1,0 +1,65 @@
+﻿@model HotelMVC.Models.Reservation
+@{
+    ViewData["Title"] = "BookNow";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<head>
+    <style>
+        .form-group input, .form-group a {
+            font-weight: 700;
+            height: 55px;
+            padding: 10px 30px;
+            width: 100%;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+            line-height: 35px;
+        }
+        .control-label{
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<hr />
+
+<div class="container">
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-md-6 col-sm-8">
+            <h1 style="margin-bottom: 50px; margin-top: 25px; font-weight: 700; text-align: center;">Booking Your Room</h1>
+            <form asp-action="BookNow" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="Roomid" value="@Model.Roomid" />
+                <input type="hidden" asp-for="Userid" value="@Model.Userid" />
+
+                <div class="form-group">
+                    <label asp-for="Checkindate" class="control-label">Check in date</label>
+                    <input asp-for="Checkindate" class="form-control" required />
+                    <span asp-validation-for="Checkindate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Checkoutdate" class="control-label">Check out date</label>
+                    <input asp-for="Checkoutdate" class="form-control" required />
+                    <span asp-validation-for="Checkoutdate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-top: 45px;">
+                    <input type="submit" value="Book Now" class="btn btn-primary" style="font-weight:800;"/>
+
+                    @*<a asp-action="BookNow" class="btn btn-primary">Back</a>*@
+                    <a asp-controller="Admin" asp-action="GetRoomsByHotelId" asp-route-id="@ViewBag.hotelId" class="btn btn-primary" style="font-weight:800;">Back</a>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

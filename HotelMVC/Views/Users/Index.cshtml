@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HotelMVC.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Userfname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Userlname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Userphone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Useremail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagepath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Userfname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Userlname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Userphone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Useremail)
+            </td>
+            <td>
+                <img src=@Url.Content("~/Images/" + item.Imagepath) asp-append-version ="true"
+                style="border-radius:20%;" width="100" height="100" />
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Userid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Userid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Userid">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

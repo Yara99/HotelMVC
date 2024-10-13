@@ -1,0 +1,70 @@
+﻿@model HotelMVC.Models.Testimonial
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<head>
+    <style>
+        .form-group input, .form-group a {
+            font-weight: 700;
+            height: 55px;
+            padding: 10px 30px;
+            width: 100%;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+            line-height: 35px;
+        }
+        .control-label{
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<hr />
+<div class="container">
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-md-6 col-sm-8">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Testimonialcontent" class="control-label"></label>
+                    @*<input asp-for="Testimonialcontent" class="form-control" />*@
+                    <textarea rows="5" cols="40" asp-for="Testimonialcontent" class="form-control"></textarea>
+                    <span asp-validation-for="Testimonialcontent" class="text-danger"></span>
+                </div>
+                @* <div class="form-group">
+                <label asp-for="Testimonialdate" class="control-label"></label>
+                <input asp-for="Testimonialdate" class="form-control" />
+                <span asp-validation-for="Testimonialdate" class="text-danger"></span>
+                </div>*@
+                @* <div class="form-group">
+                <label asp-for="Testimonialstatus" class="control-label"></label>
+                <input asp-for="Testimonialstatus" class="form-control" />
+                <span asp-validation-for="Testimonialstatus" class="text-danger"></span>
+                </div>*@
+                @*<div class="form-group">
+                <label asp-for="Userid" class="control-label"></label>
+                <select asp-for="Userid" class ="form-control" asp-items="ViewBag.Userid"></select>
+                </div>*@
+                <div class="form-group" style="margin-top: 45px;">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+   @* <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+</div>
+

@@ -1,0 +1,140 @@
+﻿@model Tuple<IEnumerable<Hotel>,IEnumerable<Userlogin>>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="row mb-5" id="Charts">
+    <div class="container mt-4" style="width:30%;">
+        <h3>Overall Room Availability</h3>
+        <canvas id="overallChart" width="400" height="300"></canvas>
+        <div id="chartData" style="text-align: center; margin-top: 20px;">
+            <p><strong>Available Rooms: </strong> <span>@ViewBag.allAvailableRooms</span></p>
+            <p><strong>Booked Rooms: </strong> <span>@ViewBag.allBookedRooms</span></p>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center">
+    <div class="row">
+        <div class="col-sm-4 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Number of Registered Users</h3>
+                    <div class="row">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <div class="d-flex d-sm-block d-md-flex align-items-center justify-content-center">
+                                <h2 class="mb-0">" @ViewBag.registeredUsers "</h2>
+                            </div>
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-account-multiple-outline text-primary ml-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Available and Booked Rooms</h3>
+                    <div class="row align-items-center">
+                        <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th class="pl-0  pb-2 border-bottom">Hotel Name</th>
+                                        <th class="border-bottom pb-2">Available Rooms</th>
+                                        <th class="border-bottom pb-2">Booked Rooms</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.HotelAvailability)
+                                    {
+                                        <tr>
+                                            <td>@item.HotelName</td>
+                                            <td>@item.AvailableRoomCount</td>
+                                            <td>@item.BookedRoomCount</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                            <i class="icon-lg mdi mdi-hotel text-danger ml-auto"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+<div class="col-lg-12 grid-margin stretch-card" style="margin-top: 30px;">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center">Info of Registered Users</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th> User </th>
+                            <th> First Name </th>
+                            <th> Last Name </th>
+                            <th> Phone </th>
+                            <th> Email </th>
+                            <th> Username </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Item2)
+                        {
+                            <tr>
+                                <td class="py-1">
+                                    <img src=@Url.Content("~/Images/" + item.User.Imagepath) asp-append-version="true"
+                                     style="border-radius:20%;" width="100" height="100" />
+                                </td>
+                                <td> @item.User.Userfname </td>
+                                <td> @item.User.Userlname </td>
+                                <td>@item.User.Userphone</td>
+                                <td>@item.User.Useremail</td>
+                                <td>@item.Username</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx2 = document.getElementById('overallChart').getContext('2d');
+        var chart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ['Available Rooms', 'Booked Rooms'],
+                datasets: [{
+                    label: 'Room Availability',
+                    data: [@ViewBag.allAvailableRooms, @ViewBag.allBookedRooms],
+                    backgroundColor: ['#36a2eb', '#ff6384']
+                }]
+            }
+        });
+</script>

@@ -1,0 +1,62 @@
+﻿@model HotelMVC.Models.Hotel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit Hotel</h1>
+
+<hr />
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-8">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Hotelid" />
+                        <div class="form-group">
+                            <label asp-for="Hotelname" class="control-label"></label>
+                            <input asp-for="Hotelname" class="form-control" />
+                            <span asp-validation-for="Hotelname" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Hoteladdress" class="control-label"></label>
+                            <input asp-for="Hoteladdress" class="form-control" />
+                            <span asp-validation-for="Hoteladdress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Hotelphone" class="control-label"></label>
+                            <input asp-for="Hotelphone" class="form-control" />
+                            <span asp-validation-for="Hotelphone" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Hotelemail" class="control-label"></label>
+                            <input asp-for="Hotelemail" class="form-control" />
+                            <span asp-validation-for="Hotelemail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Hoteldescription" class="control-label"></label>
+                            <textarea rows="10" cols="40" asp-for="Hoteldescription" class="form-control"></textarea>
+                            <span asp-validation-for="Hoteldescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageFile" class="control-label"></label>
+                            <input asp-for="ImageFile" class="form-control" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+        </div>
+    </div>
+</div>

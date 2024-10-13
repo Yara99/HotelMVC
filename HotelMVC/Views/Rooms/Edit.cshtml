@@ -1,0 +1,70 @@
+﻿@model HotelMVC.Models.Room
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit Room</h1>
+
+<hr />
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-8">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Roomid" />
+                        <div class="form-group">
+                            <label asp-for="Roomprice" class="control-label"></label>
+                            <input asp-for="Roomprice" class="form-control" />
+                            <span asp-validation-for="Roomprice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Roomcapacity" class="control-label"></label>
+                            <input asp-for="Roomcapacity" class="form-control" />
+                            <span asp-validation-for="Roomcapacity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Roomdescription" class="control-label"></label>
+                            <textarea rows="5" cols="40" asp-for="Roomdescription" class="form-control"></textarea>
+                            <span asp-validation-for="Roomdescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ImageFile" class="control-label"></label>
+                            <input asp-for="ImageFile" class="form-control" />
+                            <span asp-validation-for="ImageFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Availabilitystatus" class="control-label"></label>
+                            <input asp-for="Availabilitystatus" class="form-control" />
+                            <span asp-validation-for="Availabilitystatus" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Hotelid" class="control-label"></label>
+                            <select asp-for="Hotelid" class="form-control" asp-items="ViewBag.Hotelid"></select>
+                            <span asp-validation-for="Hotelid" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                @if (ViewBag.UserId == 1) //admin
+                {
+                    <a asp-controller="Admin" asp-action="GetRoomsByHotelIdAdmin" asp-route-id="@Model.Hotelid">Back to List</a>
+                }
+                else
+                {
+                    <a asp-controller="Admin" asp-action="GetRoomsByHotelId" asp-route-id="@Model.Hotelid">Back to List</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+

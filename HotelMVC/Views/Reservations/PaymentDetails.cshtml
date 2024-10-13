@@ -1,0 +1,94 @@
+﻿@model HotelMVC.Models.Reservation
+@{
+    ViewData["Title"] = "PaymentDetails";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<head>
+    <style>
+        .form-group button, .form-group a {
+            font-weight: 700;
+            height: 55px;
+            padding: 10px 30px;
+            width: 100%;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+            line-height: 35px;
+        }
+
+        .control-label {
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .book-info p{
+            font-size: 20px;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<hr />
+
+<div class="container" >
+    <div class="row" style="display: flex; justify-content: center; margin-top: 20px;">
+        <div class="col-md-6">
+            <h1 style="margin-bottom: 50px; margin-top: 25px; font-weight: 700; text-align: center;">Booking Details</h1>
+            <div class="book-info" style="margin-bottom: 30px;">
+                <h3><p>Check-in Date: </p> @Model.Checkindate</h3>
+                <h3><p>Check-out Date: </p> @Model.Checkoutdate</h3>
+                <h3><p>Total Price: </p> $@Model.Totalprice</h3>
+                <h3><p>Room: </p> @ViewBag.RoomDesc </h3>
+                <h3><p>Room price per day: </p> $@ViewBag.RoomPrice</h3>
+                <h3><p>Total Days: </p> @ViewBag.TotalDays</h3>
+            </div>
+
+
+
+            <form asp-action="Payment" method="post">
+                <input type="hidden" name="ReservationId" value="@Model.Reservationid" />
+                <input type="hidden" name="Checkindate" value="@Model.Checkindate.Value.ToString("yyyy-MM-dd")" />
+                <input type="hidden" name="Checkoutdate" value="@Model.Checkoutdate.Value.ToString("yyyy-MM-dd")" />
+                <input type="hidden" name="Totalprice" value="@Model.Totalprice" />
+                <input type="hidden" name="Userid" value="@Model.Userid" />
+                <input type="hidden" name="Roomid" value="@Model.Roomid" />
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Proceed to Pay</button>
+                    <a asp-action="BookNow" asp-route-roomId="@Model.Roomid" asp-route-userid="@Model.Userid" class="btn btn-primary">Back</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

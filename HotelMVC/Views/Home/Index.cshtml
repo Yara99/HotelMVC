@@ -1,0 +1,147 @@
+﻿@model Tuple<IEnumerable<Hotel>,IEnumerable<Testimonial>>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var userId = ViewBag.UserId as int?;
+    var roleId = ViewBag.RoleId;
+}
+<head>
+    <style>
+
+        .carousel-wrapper:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+        }
+
+    </style>
+</head>
+
+
+
+<div id="myCarousel1" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="carousel-wrapper">
+
+                <img src=@Url.Content("~/Images/" + ViewBag.HomeImage ) asp-append-version="true"
+                     style="width:100%; height: 500px;" alt="First slide" />
+
+
+                @*<img src="~/HomeAssets/images/banner3.png" style="width:100%; height: 500px" alt="First slide">*@
+
+                <div class="carousel-caption">
+                    @*<h1>vacayhome spa &amp; Resort</h1>
+                    <h2>Welcome to our website, where you can find you stay</h2>*@
+                    <h1>@ViewBag.HomeTitle</h1>
+                    <h2 style="margin:20px;">@ViewBag.HomeContent</h2>
+                    <div style="margin-top: 40px;">
+                        <form asp-controller="Home" asp-action="HotelsSearch" style="display: flex;justify-content: center;">
+                            <input type="text" name="searchQuery" placeholder="Search for hotels..." style="padding: 12px; width: 40%; font-size: 16px; color: black;">
+                            <button type="submit" class="btn btn-primary book-now-btn" style="margin-left: 5px;">Search</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="clearfix"></div>
+
+
+
+<section class="resort-overview-block">
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center; margin-bottom: 70px; font-family: 'exotc350_dmbd_btdemi-bold'; font-size: 50px;">
+                Hotels
+            </h1>
+            @foreach (var item in Model.Item1)
+            {
+                <div class="col-md-6 col-sm-12 col-xs-12 remove-padd-right">
+                    <div class="side-A">
+                        <div class="product-thumb">
+                            <div class="image">
+                                <img class="img-responsive gradient-corona-img img-fluid" src=@Url.Content("~/Images/" + item.Hotelimage) asp-append-version="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-B">
+                        <div class="product-desc-side">
+                            <h3><a>@item.Hotelname</a></h3>
+                            <p>@item.Hoteldescription</p>
+                            <div class="links"><a asp-controller="Admin" asp-action="GetRoomsByHotelId" asp-route-id="@item.Hotelid">Read more</a></div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<section class="blog-block-slider">
+    <div class="text-center" style="margin-bottom:25px;">
+        @if (userId.HasValue && roleId == 2)
+        {
+            <form asp-controller="Testimonials" asp-action="Create" method="get">
+                <div class="form-group">
+                    <input type="submit" value="Add Your Feedback" class="btn btn-primary book-now-btn"
+                       style="height: 60px; width: 320px;" />
+                </div>
+            </form>
+        }
+    </div>
+
+    <div class="blog-block-slider-fix-image" style="margin-bottom: 170px;">
+        <div id="myCarousel2" class="carousel slide" data-ride="carousel">
+            <div class="container">
+                <!-- Wrapper for slides -->
+                <ol class="carousel-indicators">
+                    @for (int i = 0; i < Model.Item2.Count(); i++)
+                    {
+                        <li data-target="#myCarousel2" data-slide-to="@i" class="@(i == 0 ? "active" : "")" style="width: 80px;"></li>
+                    }
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    @for (int i = 0; i < Model.Item2.Count(); i++)
+                    {
+                        var testimonial = Model.Item2.ElementAt(i);
+                        <div class="item @(i == 0 ? "active" : "")">
+                            <div class="blog-box">
+                                <p>@testimonial.Testimonialcontent</p>
+                            </div>
+                            <div class="blog-view-box">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img src=@Url.Content("~/Images/" + testimonial.User.Imagepath)
+                                         asp-append-version="true" class="media-object" style="width: 90px;height: 90px; border-radius: 50% !important;">
+                                    </div>
+                                    <div class="media-body">
+                                        <h3 class="media-heading blog-title" style="font-size:20px !important;">@testimonial.User.Userfname @testimonial.User.Userlname</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+</section>

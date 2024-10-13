@@ -1,0 +1,81 @@
+﻿@model HotelMVC.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+    var rid = ViewBag.RoleId;
+    if (rid == 1)
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
+
+}
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Userid" />
+            <div class="form-group">
+                <label asp-for="Userfname" class="control-label"></label>
+                <input asp-for="Userfname" class="form-control" />
+                <span asp-validation-for="Userfname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Userlname" class="control-label"></label>
+                <input asp-for="Userlname" class="form-control" />
+                <span asp-validation-for="Userlname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Userphone" class="control-label"></label>
+                <input asp-for="Userphone" class="form-control" />
+                <span asp-validation-for="Userphone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Useremail" class="control-label"></label>
+                <input asp-for="Useremail" class="form-control" />
+                <span asp-validation-for="Useremail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                <input type="text" name="username" id="username" placeholder="Your username" />
+            </div>
+            <div class="form-group">
+                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                <input type="password" name="password" id="password" placeholder="Password" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    @if (ViewBag.UserId == 1) //admin
+    {
+        <a asp-controller="Admin" asp-action="Index">Back to List</a>
+    }
+    else
+    {
+        <a asp-controller="Home" asp-action="Index">Back to List</a>
+    }
+
+
+    @*<a asp-controller="Userlogins" asp-action="Edit" asp-route-id="@ViewBag.UserloginsId">Change Username or Password</a>*@
+</div>
+

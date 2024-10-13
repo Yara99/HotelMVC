@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Hotel>
+@{
+    ViewData["Title"] = "HotelsPage";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+
+<section class="resort-overview-block">
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center; margin-bottom: 70px; font-family: 'exotc350_dmbd_btdemi-bold'; font-size: 50px;">
+                Hotels
+            </h1>
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-sm-12 col-xs-12 remove-padd-right">
+                    <div class="side-A">
+                        <div class="product-thumb">
+                            <div class="image">
+                                <img class="img-responsive gradient-corona-img img-fluid" src=@Url.Content("~/Images/" + item.Hotelimage) asp-append-version="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="side-B">
+                        <div class="product-desc-side">
+                            <h3><a>@item.Hotelname</a></h3>
+                            <p>@item.Hoteldescription</p>
+                            <div class="links"><a asp-controller="Admin" asp-action="GetRoomsByHotelId" asp-route-id="@item.Hotelid">Read more</a></div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</section>
+

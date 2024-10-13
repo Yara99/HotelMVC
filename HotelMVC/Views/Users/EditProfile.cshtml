@@ -1,0 +1,88 @@
+﻿@model HotelMVC.Models.User
+
+@{
+    ViewData["Title"] = "EditProfile";
+    var rid = ViewBag.RoleId;
+    if (rid == 1)
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
+}
+
+<head>
+    <style>
+        .form-group input, .form-group a {
+            font-weight: 700;
+            height: 45px;
+            padding: 10px 30px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 14px;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .control-label {
+            font-weight: 800;
+            letter-spacing: 1px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+
+<hr />
+
+<div class="container">
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-md-6 col-sm-8">
+            <form asp-action="EditProfile" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Userid" />
+                <div class="form-group">
+                    <label asp-for="Userfname" class="control-label">First Name</label>
+                    <input asp-for="Userfname" class="form-control" />
+                    <span asp-validation-for="Userfname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Userlname" class="control-label">Last Name</label>
+                    <input asp-for="Userlname" class="form-control" />
+                    <span asp-validation-for="Userlname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Userphone" class="control-label">Phone</label>
+                    <input asp-for="Userphone" class="form-control" />
+                    <span asp-validation-for="Userphone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Useremail" class="control-label">Email</label>
+                    <input asp-for="Useremail" class="form-control" />
+                    <span asp-validation-for="Useremail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label">Profile Image</label>
+                    <input asp-for="ImageFile" class="form-control" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="control-label">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Your username" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="password" class="control-label">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="form-control" />
+                </div>
+
+                <div class="form-group" style="margin-top: 45px;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

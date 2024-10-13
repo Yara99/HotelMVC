@@ -1,0 +1,129 @@
+﻿@model Tuple<IEnumerable<Room>, Hotel>
+
+
+@{
+    ViewData["Title"] = "GetRoomsByHotelId";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var userId = ViewBag.UserId as int?;
+    var roleId = ViewBag.RoleId;
+}
+
+<head>
+    <style>
+        .hotel-info-container {
+            margin-bottom: 50px;
+            text-align: center;
+            padding: 30px;
+            font-family: 'exotc350_dmbd_btdemi-bold';
+        }
+            .hotel-info-container h1 {
+                font-weight: 700;
+                font-size: 50px;
+            }
+        .hotel-info h3 {
+            margin-bottom: 20px;
+        }
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+            height: 430px;
+        }
+            .card img {
+                height: 100%;
+            }
+        .card-body {
+            flex: 1 1 auto;
+            padding: 1rem 1rem;
+        }
+        .card-title {
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            font-size: 2rem;
+        }
+        .card-text {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .hotel-info p {
+            font-size: 26px;
+            display: inline-block;
+        }       
+
+    </style>
+</head>
+
+<div class="hotel-info-container container mt-5 pt-5">
+    <div class="row">
+        <div style="margin-bottom: 10px;"><h1>@Model.Item2.Hotelname</h1></div>
+        <div class="hotel-info">
+            <h3><p></p> @Model.Item2.Hoteldescription</h3>
+            <h3><p>Email: </p> @Model.Item2.Hotelemail</h3>
+            <h3><p>Address: </p> @Model.Item2.Hoteladdress</h3>
+            <h3><p>Phone: </p> @Model.Item2.Hotelphone</h3>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+        <h3 style="text-align: center; margin-bottom: 70px; font-family: 'exotc350_dmbd_btdemi-bold'; font-size: 50px;">
+            Our Rooms
+        </h3>
+        @foreach (var item in Model.Item1)
+        {
+            <div class="col-md-4 col-sm-6" style="margin-bottom: 20px;">
+                <div class="card">
+                    <img src="@Url.Content("~/Images/" + item.Roomimage)" class="img-responsive gradient-corona-img img-fluid" alt="Room Image" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Roomdescription</h5>
+                        <p class="card-text">Price per night: $@item.Roomprice</p>
+                        <p class="card-text">Capacity: @item.Roomcapacity</p>
+                        <div class="btn-book-now" style="text-align: center;margin-top: 20px;">
+                            @if (item.Availabilitystatus == "available")
+                            {
+                                <form asp-controller="Reservations" asp-action="BookNow" method="get">
+                                    <input type="hidden" name="roomId" value="@item.Roomid" />
+                                    <div class="form-group">
+                                        <input type="submit" value="Book Now" class="btn btn-primary book-now-btn" />
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <form>
+                                    <div class="form-group">
+                                        <input disabled type="submit" value="Booked" class="btn btn-primary book-now-btn" />
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

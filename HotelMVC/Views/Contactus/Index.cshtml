@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HotelMVC.Models.Contactus>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success ">Create New</a>
+</p>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Contactaddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Contactemail)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Contactphone)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="white-space: initial;">
+                                    @Html.DisplayFor(modelItem => item.Contactaddress)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Contactemail)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Contactphone)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
